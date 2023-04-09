@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "AutoStatusPro is a comprehensive vehicle management system that allows businesses to track the status of their vehicles at each stage of the process, from check-in to delivery. With customizable workflows and a user-friendly interface, AutoStatusPro simplifies vehicle management for admins and helps optimize performance.",
   "main": "index.js",
+  "scripts": {
+    "commit": "sh -c 'git add . && git commit -m \"$0\" && git push -u origin main'",
+    "clearcache": "git rm -r --cached ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eliasmurcray/auto-status-pro.git"
