@@ -1,7 +1,13 @@
+# General
 node_modules
 public
 package-lock.json
 LICENSE
-.firebaserc
 src/json/firebase-config.json
+
+# Firebase
+.firebase
+.firebaserc
+
+# Mac
 .DS_STORE
