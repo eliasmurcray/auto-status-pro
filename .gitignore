@@ -4,3 +4,4 @@ package-lock.json
 LICENSE
 .firebaserc
 src/json/firebase-config.json
+.DS_STORE
