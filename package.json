@@ -4,6 +4,7 @@
   "description": "AutoStatusPro is a comprehensive vehicle management system that allows businesses to track the status of their vehicles at each stage of the process, from check-in to delivery. With customizable workflows and a user-friendly interface, AutoStatusPro simplifies vehicle management for admins and helps optimize performance.",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
     "commit": "sh -c 'git add . && git commit -m \"$0\" && git push -u origin main'",
     "clearcache": "git rm -r --cached ."
   },
@@ -16,5 +17,23 @@
   "bugs": {
     "url": "https://github.com/eliasmurcray/auto-status-pro/issues"
   },
-  "homepage": "https://github.com/eliasmurcray/auto-status-pro#readme"
+  "homepage": "https://github.com/eliasmurcray/auto-status-pro#readme",
+  "dependencies": {
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "firebase": "^9.19.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.59.3",
+    "sass-loader": "^13.2.1",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "webpack": "^5.76.2",
+    "webpack-cli": "^5.0.1"
+  }
 }
