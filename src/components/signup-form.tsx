@@ -69,7 +69,7 @@ class SignupForm extends Component<SignupFormProps> {
 				<label htmlFor='password'>Password</label>
 			</div>
 			{this.state.errors.password && <div className='error'>{this.state.errors.password}</div>}
-			<input type='submit' value='Continue' />
+			<input type='submit' value='Submit' />
 		</form>;
 	}
 }
