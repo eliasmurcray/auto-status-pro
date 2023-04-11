@@ -4,14 +4,14 @@ form .input-label-container {
   height: 48px;
   border-radius: 4px;
   box-sizing: border-box;
-	border: 2px solid #000;
-	// box-shadow: 0 0 4px #0002;
+	transition: .3s ease-in-out border-color;
+	border: 2px solid #dbdde2;
 
 	input {
 		appearance: none;
 		border: 0;
 		outline: 0;
-		padding: 15px;
+		padding: 16px;
 		width: 100%;
 		height: 100%;
 		border: none;
@@ -27,34 +27,39 @@ form .input-label-container {
 	label {
 		position: absolute;
 		pointer-events: none;
-		top: 25px;
+		top: 16px;
 		left: 10px;
-		padding: 0 5px;
+		padding: 6px 6px 2px;
 		box-sizing: border-box;
 		display: flex;
 		align-items: center;
 		transition: all .15s ease-in-out;
 		background: #222325;
 		line-height: 0;
+		background-color: #ffffff;
 		-webkit-user-select: none;
 		user-select: none;
+	}
+
+	& > input {
+		border-color: #ff4f00;
 	}
 
 	input:focus + label,
   input:valid + label,
 	input:invalid:not(:placeholder-shown) + label {
-		top: 0;
+		top: -8px;
 		left: 5px;
 		font-size: 14px;
 		transform: translateY(50%);
 	}
 
 	&:not(.error) input:valid + label {
-		top: -2px;
+		top: -8px;
 		left: 5px;
 		font-size: 14px;
 		transform: translateY(50%);
-		color: #0ed6a3;
+		color: #0cb773;
 	}
 
 	input:-webkit-autofill,

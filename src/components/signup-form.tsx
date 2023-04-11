@@ -1,4 +1,7 @@
 import React, { Component, FormEvent, RefObject, createRef } from 'react';
+import firebaseConfig from '../json/firebase-config.json';
+import { initializeApp } from 'firebase/app';
+import { createUserWithEmailAndPassword, sendEmailVerification, initializeAuth, indexedDBLocalPersistence, browserLocalPersistence } from 'firebase/auth';
 import '../scss/Signup-form.scss';
 import '../scss/form-assets.scss';
 
@@ -7,6 +10,7 @@ interface SignupFormState {
 		email: string;
 		password: string;
 		'confirm-password': string;
+		general: string;
 	};
 	showConfirmPassword: boolean;
 }
@@ -14,6 +18,11 @@ interface SignupFormState {
 interface SignupFormProps {
 	onSuccess: () => void;
 }
+
+const app = initializeApp(firebaseConfig);
+const auth = initializeAuth(app, {
+	persistence: [indexedDBLocalPersistence, browserLocalPersistence]
+});
 
 class SignupForm extends Component<SignupFormProps> {
 
@@ -31,7 +40,8 @@ class SignupForm extends Component<SignupFormProps> {
 		errors: {
 			email: '',
 			password: '',
-			'confirm-password': ''
+			'confirm-password': '',
+			general: ''
 		},
 		showConfirmPassword: false
 	};
@@ -39,7 +49,9 @@ class SignupForm extends Component<SignupFormProps> {
 	handleInput (event: FormEvent<HTMLInputElement>): void {
 		const { name, value } = event.target as HTMLInputElement;
 		this.setState({ errors: {} });
-		if(value.length === 0) return;
+		if(value.length === 0) {
+			return;
+		}
 		switch(name) {
 			case 'email':
 				if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
@@ -65,6 +77,15 @@ class SignupForm extends Component<SignupFormProps> {
 
 	handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
+		this.setState({
+			errors: {}
+		});
+		if(this.state.showConfirmPassword === false) {
+			this.setState({
+				showConfirmPassword: true
+			});
+			return;
+		}
 		const email = this.emailRef.current.value;
 		const password = this.passwordRef.current.value;
 		const confirmPassword = this.confirmPasswordRef.current.value;
@@ -84,8 +105,31 @@ class SignupForm extends Component<SignupFormProps> {
 			return;
 		}
 
-		this.props.onSuccess();
+		this.signupWithEmail(email, password)
+			.then(() => {
+				this.props.onSuccess();
+			})
+			.catch((error) => {
+				switch(error.code) {
+					case 'auth/email-already-in-use':
+						this.setState({ errors: { email: 'Email already in use.' } });
+						break;
+					default:
+						this.setState({ errors: { email: '', 'new-password': error } });
+				}
+			});
 	};
+
+	async signupWithEmail (email: string, password: string): Promise<any> {
+		localStorage.setItem('email', email);
+		const { user } = await createUserWithEmailAndPassword(auth, email, password);
+		Object.assign(window, {
+			user
+		});
+		return await sendEmailVerification(user, {
+			url: window.location.origin + '/onboarding'
+		});
+	}
 
 	render () {
 		return <form action='#' autoComplete='off' onSubmit={this.handleSubmit} className='signup-form'>
@@ -114,6 +158,7 @@ class SignupForm extends Component<SignupFormProps> {
 				<label htmlFor='confirm-password'>Confirm Password</label>
 			</div>}
 			{this.state.errors['confirm-password'] && <div className='error'>{this.state.errors['confirm-password']}</div>}
+			{this.state.errors.general && <div className='error'>{this.state.errors.general}</div>}
 			<input type='submit' value='Send Verification Email' />
 		</form>;
 	}

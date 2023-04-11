@@ -6,13 +6,22 @@ import '../scss/signup.scss';
 import SignupForm from '../components/signup-form';
 
 class App extends Component {
+
+	state = {
+		step: 1
+	}
+
 	render() {
 		return <div className='app-root'>
 			<div className='car-panel'></div>
-			<div className='form-panel'>
+			{this.state.step === 1 && <div className='form-panel'>
 				<h1>Sign Up</h1>
-				<SignupForm onSuccess={() => alert('Signup success! (temporary)')} />
-			</div>
+				<SignupForm onSuccess={() => this.setState({ step: 2 })} />
+			</div>}
+			{this.state.step === 2 && <div className='form-panel'>
+				<h2>Verify Your Email</h2>
+				<div className='email-info'>An email has been sent to your email {localStorage.getItem('email') || ''}. Please click the link in that email to complete your account.</div>
+			</div>}
 		</div>;
 	}
 }

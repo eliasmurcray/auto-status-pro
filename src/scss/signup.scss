@@ -16,6 +16,15 @@
 		justify-content: center;
 		flex-basis: 33.33%;
 		min-width: 400px;
+
+		.email-info {
+			display: flex;
+			flex-flow: column;
+			align-items: center;
+			text-align: center;
+			width: min(400px, calc(100% - var(--gutter-size)));
+			margin: 0 auto;
+		}
 	}
 }
 
