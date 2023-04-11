@@ -4,7 +4,8 @@ form .input-label-container {
   height: 48px;
   border-radius: 4px;
   box-sizing: border-box;
-	box-shadow: 0 0 4px #0002;
+	border: 2px solid #000;
+	// box-shadow: 0 0 4px #0002;
 
 	input {
 		appearance: none;
