@@ -1,0 +1,31 @@
+.loading-spinner {
+	width: 18px;
+	height: 18px;
+	position: relative;
+	display: block;
+
+	div {
+		box-sizing: border-box;
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border: 4px solid #00000000;
+		border-radius: 50%;
+		border-left-color: var(--brand-color);
+		animation: spin 1.2s cubic-bezier(.5, 0, .5, 1) infinite;
+		transition: border-color .3s ease-in-out;
+
+		&:nth-child(1) {
+			animation-delay: -.45s;
+		}
+
+		&:nth-child(2) {
+			animation-delay: -.3s;
+		}
+
+		&:nth-child(3) {
+			animation-delay: -.15s;
+		}
+	}
+}

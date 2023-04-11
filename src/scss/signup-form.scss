@@ -1,0 +1,33 @@
+.signup-form {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	text-align: center;
+	width: min(400px, calc(100% - var(--gutter-size)));
+	margin: 0 auto;
+
+	.input-label-container {
+		margin-top: 1rem;
+	}
+
+	input[type=submit] {
+		border: none;
+		font: inherit;
+		font-size: 0.85rem;
+		border-radius: 4px;
+		padding: .5rem 1rem;
+		background: #0066ff;
+		color: #fff;
+		cursor: pointer;
+		transition: filter .15s ease-in-out;
+		margin-top: 1rem;
+
+		&:hover {
+			filter: brightness(105%);
+		}
+	}
+
+	div.error {
+		color: #ff4f00;
+	}
+}

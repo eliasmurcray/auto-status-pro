@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack",
     "commit": "sh -c 'git add . && git commit -m \"$0\" && git push -u origin main'",
-    "clearcache": "git rm -r --cached ."
+    "clearcache": "git rm -r --cached .",
+    "deploy": "webpack && firebase deploy",
+    "fix": "eslint src/components --fix",
+    "lint": "eslint src/components"
   },
   "repository": {
     "type": "git",
@@ -21,9 +24,11 @@
   "dependencies": {
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
+    "eslint": "^8.38.0",
     "firebase": "^9.19.1",
     "html-webpack-plugin": "^5.5.0",
     "mini-css-extract-plugin": "^2.7.5",

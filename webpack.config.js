@@ -6,12 +6,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const names = [
-  'index'
+  'index',
+  'signup'
 ];
 
 const entries = {};
 names.forEach((name) => {
-  entries[name] = '/src/components/' + name + '.tsx';
+  entries[name] = '/src/pages/' + name + '.tsx';
 });
 
 const plugins = [];
@@ -66,17 +67,13 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
     }),
-    /*new CopyWebpackPlugin({
+    new CopyWebpackPlugin({
       patterns: [
         {
           from: './src/images',
           to: ''
-        },
-        {
-          from: './src/favicons',
-          to: ''
         }
       ]
-    })*/
+    })
   ]
 };

@@ -1,0 +1,70 @@
+form .input-label-container {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  box-sizing: border-box;
+	box-shadow: 0 0 4px #0002;
+
+	input {
+		appearance: none;
+		border: 0;
+		outline: 0;
+		padding: 15px;
+		width: 100%;
+		height: 100%;
+		border: none;
+		background: #00000000;
+		color: #121315;
+		font: inherit;
+		box-sizing: border-box;
+		border-radius: 4px;
+		font-weight: 400;
+		transition: border-color .1s ease-in-out;
+	}
+
+	label {
+		position: absolute;
+		pointer-events: none;
+		top: 25px;
+		left: 10px;
+		padding: 0 5px;
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		transition: all .15s ease-in-out;
+		background: #222325;
+		line-height: 0;
+		-webkit-user-select: none;
+		user-select: none;
+	}
+
+	input:focus + label,
+  input:valid + label,
+	input:invalid:not(:placeholder-shown) + label {
+		top: 0;
+		left: 5px;
+		font-size: 14px;
+		transform: translateY(50%);
+	}
+
+	&:not(.error) input:valid + label {
+		top: -2px;
+		left: 5px;
+		font-size: 14px;
+		transform: translateY(50%);
+		color: #0ed6a3;
+	}
+
+	input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	textarea:-webkit-autofill,
+	textarea:-webkit-autofill:hover,
+	textarea:-webkit-autofill:focus,
+	select:-webkit-autofill,
+	select:-webkit-autofill:hover,
+	select:-webkit-autofill:focus {
+		transition: all 10000000s;
+	}
+}
