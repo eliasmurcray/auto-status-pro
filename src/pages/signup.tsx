@@ -11,7 +11,7 @@ class App extends Component {
 			<div className='car-panel'></div>
 			<div className='form-panel'>
 				<h1>Sign Up</h1>
-				<SignupForm onSuccess={() => alert(0)} />
+				<SignupForm onSuccess={() => alert('Signup success! (temporary)')} />
 			</div>
 		</div>;
 	}
