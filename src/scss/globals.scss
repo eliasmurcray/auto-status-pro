@@ -30,7 +30,9 @@
 
 :root {
 	--gutter-size: 40px;
-  --brand-color: rgb(27, 205, 184);
+  --brand-primary-color: rgb(27, 205, 184);
+  --brand-secondary-color: #227ef6;
+  --brand-tertiary-color: #ee18fd;
 }
 
 body {
@@ -41,4 +43,8 @@ body {
   max-height: -webkit-fill-available;
   overflow: hidden auto;
   margin: 0;
+}
+
+*:focus {
+	box-shadow: 0 0 3px #0080ff;
 }

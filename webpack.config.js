@@ -7,7 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const names = [
   'index',
-  'signup'
+  'onboarding'
 ];
 
 const entries = {};
@@ -28,7 +28,7 @@ Object.keys(entries).forEach((entry) => {
 });
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: entries,
   module: {
     rules: [
@@ -71,6 +71,10 @@ module.exports = {
       patterns: [
         {
           from: './src/images',
+          to: ''
+        },
+        {
+          from: './src/favicons',
           to: ''
         }
       ]

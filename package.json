@@ -7,7 +7,7 @@
     "build": "webpack",
     "commit": "sh -c 'git add . && git commit -m \"$0\" && git push -u origin main'",
     "clearcache": "git rm -r --cached .",
-    "deploy": "webpack && firebase deploy",
+    "deploy": "webpack --mode production && firebase deploy",
     "fix": "eslint src/components --fix",
     "lint": "eslint src/components"
   },
@@ -25,6 +25,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "compression-webpack-plugin": "^10.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",

@@ -7,6 +7,8 @@
 	.car-panel {
 		flex-basis: 66.67%;
 		background: url(../images/mitsubishi-lancer-evo-rally.webp) center / cover;
+		animation: background-slide 0.75s ease-in-out forwards;
+		opacity: 0;
 	}
 
 	.form-panel {
@@ -26,5 +28,26 @@
 			margin: 0 auto;
 		}
 	}
+
+	@media screen and (max-width: 600px) {
+		.car-panel {
+			display: none;
+		}
+		
+		.form-panel {
+			flex-basis: 100%;
+		}
+	}
 }
 
+@keyframes background-slide {
+	0% {
+		background-position: calc(45%) 50%;
+		opacity: 0.3;
+	}
+
+	100% {
+		background-position: 50% 50%;
+		opacity: 1;
+	}
+}
