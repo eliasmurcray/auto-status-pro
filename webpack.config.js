@@ -12,7 +12,7 @@ const names = [
 
 const entries = {};
 names.forEach((name) => {
-  entries[name] = '/src/pages/' + name + '.tsx';
+  entries[name] = `/src/pages/${name}/${name}.tsx`;
 });
 
 const plugins = [];

@@ -1,14 +1,14 @@
-import '../scss/globals.scss';
-import '../scss/onboarding.scss';
+import '../../globals.scss';
+import './onboarding.scss';
 import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
-import firebaseConfig from '../json/firebase-config.json';
+import firebaseConfig from '../../json/firebase-config.json';
 import { initializeApp } from 'firebase/app';
 import { User, browserLocalPersistence, indexedDBLocalPersistence, initializeAuth, onAuthStateChanged } from 'firebase/auth';
 import { getDatabase, onValue, ref, set } from 'firebase/database';
-import LoadingSpinner from '../components/loading-spinner/loading-spinner';
-import DisplayNameForm from '../components/display-name-form/display-name-form';
-import RoleChooseForm from '../components/role-choose-form/role-choose-form';
+import LoadingSpinner from '../../components/loading-spinner/loading-spinner';
+import DisplayNameForm from '../../components/display-name-form/display-name-form';
+import RoleChooseForm from '../../components/role-choose-form/role-choose-form';
 
 interface AppState {
 	user: User | null;

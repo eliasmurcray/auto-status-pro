@@ -28,6 +28,23 @@
 
 	label {
 		font-size: 14px;
+		width: 100%;
+		text-align: start;
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+	}
+
+	.forgot-password {
+		font-size: 12px;
+		color: var(--brand-primary-color);
+		text-decoration: underline 1px #0000;
+		transition: .1s ease-in-out;
+		margin-left: auto;
+
+		&:hover {
+			text-decoration-color: var(--brand-primary-color);
+		}
 	}
 
 	input[type=email],
@@ -59,7 +76,7 @@
 		line-height: 20px;
 		padding: 5px 12px;
 		border: 0;
-		background-color: var(--brand-secondary-color);
+		background-color: var(--brand-primary-color);
 		color: #fff;
 		border-radius: 4px;
 		cursor: pointer;

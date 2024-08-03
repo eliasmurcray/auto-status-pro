@@ -12,6 +12,8 @@ interface LoginFormState {
 		password: string | null;
 	};
 	emailSent: boolean;
+	loggingIn: boolean;
+	signingUp: boolean;
 };
 
 const data = {
@@ -39,7 +41,9 @@ class LoginForm extends Component {
 			email: null,
 			password: null
 		},
-		emailSent: false
+		emailSent: false,
+		loggingIn: false,
+		signingUp: false
 	};
 
 	componentDidMount(): void {
@@ -63,11 +67,16 @@ class LoginForm extends Component {
 			return;
 		}
 
+		this.setState({
+			signingUp: true
+		});
+
 		const email = this.emailRef.current.value;
 		const password = this.passwordRef.current.value;
 
 		if(email.length === 0) {
 			this.setState({
+				signingUp: false,
 				errors: {
 					email: 'Email field is required'
 				}
@@ -77,6 +86,7 @@ class LoginForm extends Component {
 
 		if(!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
 			this.setState({
+				signingUp: false,
 				errors: {
 					email: 'Invalid format'
 				}
@@ -86,6 +96,7 @@ class LoginForm extends Component {
 
 		if(password.length === 0) {
 			this.setState({
+				signingUp: false,
 				errors: {
 					password: 'Password field is required'
 				}
@@ -95,6 +106,7 @@ class LoginForm extends Component {
 
 		if(password.length < 8) {
 			this.setState({
+				signingUp: false,
 				errors: {
 					password: 'Password must be at least 8 characters long'
 				}
@@ -110,16 +122,27 @@ class LoginForm extends Component {
 			}))
 			.then(() => {
 				this.setState({
+					signingUp: false,
 					emailSent: true
 				});
 			})
 			.catch((error) => {
 				switch(error.code) {
 					case 'auth/email-already-in-use':
-						this.setState({ errors: { email: 'Email already in use.' } });
+						this.setState({
+							signingUp: false,
+							errors: {
+								email: 'Email already in use.'
+							}
+						});
 						break;
 					default:
-						this.setState({ errors: { email: '', password: error } });
+						this.setState({
+							signingUp: false,
+							errors: {
+								password: error
+							}
+						});
 				}
 			});
 	}
@@ -130,6 +153,10 @@ class LoginForm extends Component {
 			return;
 		}
 
+		this.setState({
+			loggingIn: true
+		});
+
 		const email = this.emailRef.current.value;
 		const password = this.passwordRef.current.value;
 
@@ -137,7 +164,33 @@ class LoginForm extends Component {
 			.then(() => {
 				window.open('/dashboard', '_self');
 			})
-			.catch(alert);
+			.catch((error) => {
+				switch(error.code) {
+					case 'auth/user-not-found':
+						this.setState({
+							loggingIn: false,
+							errors: {
+								email: 'User not found'
+							}
+						});
+						break;
+					case 'auth/wrong-password':
+						this.setState({
+							loggingIn: false,
+							errors: {
+								password: 'Wrong password'
+							}
+						});
+						break;
+					default:
+						this.setState({
+							loggingIn: false,
+							errors: {
+								email: error
+							}
+						});
+				}
+			});
 	}
 
 	render() {
@@ -150,18 +203,18 @@ class LoginForm extends Component {
 			<form className='login-form' action='#' onSubmit={this.handleSubmit}>
 				<label htmlFor='email'>Email</label>
 				<div className='input-container'>
-					<input ref={this.emailRef} id='email' type='email' onInput={() => this.setState({ errors: { email: null }})} required/>
-					{this.state.errors.email !== null && 
+					<input ref={this.emailRef} id='email' type='email' onInput={() => this.setState({ errors: { email: '' }})} required/>
+					{this.state.errors.email && 
 					<div className='error'>{this.state.errors.email}</div>}
 				</div>
-				<label htmlFor='password'>Password</label>
+				<label htmlFor='password'>Password <a className='forgot-password' href="/passwordreset">Forgot Password?</a></label>
 				<div className='input-container'>
-					<input ref={this.passwordRef} type='password' onInput={() => this.setState({ errors: { password: null }})} required/>
-					{this.state.errors.password !== null && 
+					<input ref={this.passwordRef} type='password' onInput={() => this.setState({ errors: { password: '' }})} required/>
+					{this.state.errors.password && 
 						<div className='error'>{this.state.errors.password}</div>}
 				</div>
-				<input type='submit' value={this.state.auth ? 'Log In' : 'Loading...'} />
-				<button onClick={this.state.auth ? this.signUpUser : null}>{this.state.auth ? 'Sign Up' : 'Loading...'}</button>
+				<input type='submit' value={this.state.loggingIn ? 'Logging In...' : 'Log In'} />
+				<button onClick={this.state.auth ? this.signUpUser : null}>{this.state.signingUp ? 'Signing Up...' : 'Sign Up'}</button>
 			</form>}
 		</div>;
 	}

@@ -31,13 +31,13 @@
 				display: block;
 
 				a {
-					color: #2663fd;
-					text-decoration-color: #0000;
+					color: var(--brand-primary-color);
+					text-decoration: 1px underline #0000;
 					transition: .1s ease-in-out;
 					font-size: 14px;
 
 					&:hover {
-						text-decoration-color: #2663fd;
+						text-decoration-color: var(--brand-primary-color);
 					}
 				}
 			}

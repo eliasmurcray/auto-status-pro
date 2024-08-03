@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { createRoot } from 'react-dom/client';
 
-import '../scss/globals.scss';
-import '../scss/index.scss';
-import LoginForm from '../components/login-form/login-form';
+import '../../globals.scss';
+import './index.scss';
+import LoginForm from '../../components/login-form/login-form';
 
 class App extends Component {
 	render() {
